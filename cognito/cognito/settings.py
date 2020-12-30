@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'acount',
 ]
 
 MIDDLEWARE = [
@@ -124,6 +126,20 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+        #'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.permissions.AllowAny'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'acount.utils.auth.CognitoAuthentication',
+    ],
 }
+
+# AWS Settings
+AWS_REGION_NAME = os.environ["AWS_REGION_NAME"]
+AWS_ACCESS_KEY_ID = os.environ["AWS_ACCESS_KEY_ID"]
+AWS_SECRET_ACCESS_KEY = os.environ["AWS_SECRET_ACCESS_KEY"]
+AWS_COGNITO_USER_POOL_ID = os.environ["AWS_COGNITO_USER_POOL_ID"]
+AWS_COGNITO_APP_ID = os.environ["AWS_COGNITO_APP_ID"]
+COGNITO_USER_MODEL = "acount.Account"
+COGNITO_PUBLIC_KEYS_CACHING_ENABLED = True
+COGNITO_PUBLIC_KEYS_CACHING_TIMEOUT = 60*60*24
