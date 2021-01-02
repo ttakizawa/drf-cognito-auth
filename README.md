@@ -12,6 +12,59 @@ Django REST Framework　での　AWS Cognitoを使用した認証API実装のサ
 
 ![ユーザープールの作成①](./docs/cognito_settig_1.png)
 
+3. 画面右上の「ユーザープールを作成する」をクリックします。
+
+![ユーザープールの作成②](./docs/cognito_settig_2.png)
+
+4. プール名に任意のプール名を設定して進みます。
+
+![ユーザープールの作成③](./docs/cognito_settig_3.png)
+
+5. 属性の設定をおこないます。このサンプルでは標準属性については全てチェックを外します。
+
+![ユーザープールの作成④](./docs/cognito_settig_4.png)
+![ユーザープールの作成⑤](./docs/cognito_settig_5.png)
+
+6. ポリシーの設定を行います。パスワードの強度やユーザーに自己サインアップを許可するかなどを設定します。
+
+![ユーザープールの作成⑥](./docs/cognito_settig_6.png)
+
+7. MFAそして確認の設定を行います。このサンプルではMFAの設定は行いません。
+
+![ユーザープールの作成⑦](./docs/cognito_settig_7.png)
+
+8. 「メッセージのカスタマイズ」、「タグ」、「デバイス」の設定はデフォルトのままで設定します。
+
+9. アプリクライアントの設定
+
+![ユーザープールの作成⑧](./docs/cognito_settig_8.png)
+![ユーザープールの作成⑨](./docs/cognito_settig_9.png)
+
+10. トリガーの設定
+
+トリガーの設定では特に設定する項目はありません。デフォルトのままでOKです。
+
+11. プールの作成
+
+上記の設定が完了したら「プールの作成」をクリックしてユーザープールを作成します。
+
+### プールIDの確認
+
+作成したユーザープールが一覧に表示されているので、クリックして確認します。
+
+![プールIDの確認①](./docs/cognito_settig_10.png)
+
+画面上部にプールIDが表示されています。
+
+![プールIDの確認②](./docs/cognito_settig_11.png)
+
+### アプリクライアントIDの確認
+
+画面左側のメニューの「アプリクライアント」をクリックします。
+画面真ん中にアプリクライアントIDが表示されています。
+
+![アプリクライアントIDの確認](./docs/cognito_settig_12.png)
+
 ## サンプルプログラムの実行手順
 
 AWS Cognitoの設定を完了していることを前提とする
@@ -26,7 +79,10 @@ pip install -r requirements.txt
 
 ### .envファイルの編集
 
-.env.sampleの内容を参考に、xxxxxxxxxの部分を自身のアクセスキー及びIDに変更する
+.env.sampleの内容を参考に、xxxxxxxxxの部分を自身のアクセスキー及びIDに変更する。
+AWS_COGNITO_USER_POOL_IDにはプールID、
+AWS_COGNITO_APP_IDにはアプリクライアントID
+をそれぞれ設定する。
 
 ```
 AWS_REGION_NAME=ap-northeast-1
